@@ -38,7 +38,6 @@ public class WriteAction implements Action {
 		System.out.println("request getContentType : " + request.getContentType());
 
 		// MultipartRequest 디펜던시 받아와라잉
-		try {
 			multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 			HttpSession session = request.getSession();
 			UserVo authUser = (UserVo) session.getAttribute("authUser"); //session에서 아이디 정보 가져오기
@@ -61,10 +60,6 @@ public class WriteAction implements Action {
 
 			System.out.println(authUser.getName());
 			System.out.println(authUser.getNo());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		MvcUtil.redirect(request.getContextPath() + "/board?a=board", request, response); // board ㄱㄱ
 	}
 
