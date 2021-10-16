@@ -352,6 +352,7 @@ public class BoardDao {
 			String sql = " select a.no ,  a.title  , a.contents , a.reg_date, a.depth , a.hit , b.no as user_no , b.name"
 					+ " from board a ,user b" + " where a.user_no = b.no" + " and a.title like '%" + searchValue + "%'"
 					+ " order by  a.group_no  desc  , a.order_no asc limit ? , ?";
+			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, first);
 			pstmt.setInt(2, second);

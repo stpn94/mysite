@@ -19,11 +19,11 @@ public class ListAction implements Action {
 		System.out.println("ListAction start");
 
 		int page = 1;
-		int limit = 10;
+		int limit = 5;
 		
 		// 검색어
 		String searchValue = request.getParameter("kwd");
-
+		
 		if (searchValue == null || searchValue.isEmpty()) {
 			searchValue = "";
 		}
@@ -43,8 +43,8 @@ public class ListAction implements Action {
 		// [이전] [1][2][3][4][5][6][7][8][9][10] 다음
 		// [이전] [11][12][13][14][15][16][17][18][19][20] 다음
 		// [이전] [21][22][23] 다음
-		int startPage = (((int)((double)page/limit +0.9)) -1)*10+1;
-		int endPage = startPage +10 -1;
+		int startPage = (((int)((double)page/limit +0.9)) -1)*5+1;
+		int endPage = startPage +5 -1;
 		
 		if(endPage > maxPage) {
 			endPage = maxPage;
@@ -55,9 +55,9 @@ public class ListAction implements Action {
 //		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);		
 		
 		request.setAttribute("articleList", list);
-		request.setAttribute("curPageNum", page);
-		request.setAttribute("blockStartNum", startPage);
-		request.setAttribute("blockLastNum", endPage);
+		request.setAttribute("currentPage", page);
+		request.setAttribute("startNum", startPage);
+		request.setAttribute("lastNum", endPage);
 		request.setAttribute("lastPageNum", maxPage); // lastPageNum = 6일 때, 7, 8, 9, 10는 링크를 활성화 하지 못함
 		
 		MvcUtil.forward("board/list", request, response);

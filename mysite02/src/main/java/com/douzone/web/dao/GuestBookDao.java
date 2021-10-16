@@ -15,7 +15,7 @@ public class GuestBookDao {
 		Connection conn = null;
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mysql://127.0.0.1:3306:3306/webdb?characterEncoding=utf8";
+			String url = "jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 			System.out.println("JDBC ok:");
 		} catch (ClassNotFoundException e) {

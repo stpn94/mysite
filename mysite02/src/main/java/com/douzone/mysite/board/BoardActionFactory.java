@@ -36,7 +36,7 @@ public class BoardActionFactory extends ActionFactory {
 		else {
 			
 			/* 게시판 리스트 메인화면 */
-			action = new ListAction3();
+			action = new ListAction();
 		}
 		return action;
 	}

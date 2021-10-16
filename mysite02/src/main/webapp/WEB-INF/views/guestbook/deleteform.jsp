@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,8 +11,8 @@
 </head>
 <body>
 	<div id="container">
-	 <div id="header">
-		<c:import url="/WEB-INF/views/includes/header.jsp" />
+		<div id="header">
+			<c:import url="/WEB-INF/views/includes/header.jsp" />
 		</div>
 		<div id="content">
 			<div id="guestbook" class="delete-form">
@@ -27,9 +27,9 @@
 			</div>
 		</div>
 		<div id="navigation">
-		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
+			<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		</div>
-		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>
