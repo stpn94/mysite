@@ -14,9 +14,7 @@ public class WriteFormAction implements Action {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("WriteFormAction start");
-		
 		MvcUtil.forward("board/write", request, response);
-
 	}
 
 }

@@ -33,15 +33,16 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("insertReply start");
-			String sql = " insert into board values(null , ? , ? ,  sysdate(), ? , ? ,? , ? ,? )";
+			String sql = " insert into board values(null , ? , ? ,  sysdate(), ? ,?, ? ,? , ? ,? )";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setInt(3, vo.getHit());
-			pstmt.setInt(4, vo.getGroupNo());
-			pstmt.setInt(5, vo.getOrderNo());
-			pstmt.setInt(6, vo.getDepth());
-			pstmt.setLong(7, vo.getUserNo());
+			pstmt.setString(4, vo.getFile());
+			pstmt.setInt(5, vo.getGroupNo());
+			pstmt.setInt(6, vo.getOrderNo());
+			pstmt.setInt(7, vo.getDepth());
+			pstmt.setLong(8, vo.getUserNo());
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 
@@ -402,32 +403,6 @@ public class BoardDao {
 		return result;
 	}
 
-	/*
-	 * public BoardVo findByNo(Long no) { BoardVo vo = null;
-	 * 
-	 * Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * 
-	 * try { conn = getConnection();
-	 * 
-	 * String sql
-	 * =" select title , contents , reg_date , user_no from board where no = ?" ;
-	 * pstmt = conn.prepareStatement(sql); pstmt.setLong(1, no); rs =
-	 * pstmt.executeQuery();
-	 * 
-	 * while(rs.next()) { String title = rs.getString(1); String contents =
-	 * rs.getString(2); String regDate = rs.getString(3); Long userNo =
-	 * rs.getLong(4);
-	 * 
-	 * vo = new BoardVo(); vo.setTitle(title); vo.setContents(contents);
-	 * vo.setRedDate(regDate); vo.setUserNo(userNo);
-	 * 
-	 * } } catch (SQLException e) { System.out.println("error:" + e); } finally {
-	 * try { if(rs != null) { rs.close(); } if(pstmt != null) { pstmt.close(); }
-	 * if(conn != null) { conn.close(); } } catch (SQLException e) {
-	 * e.printStackTrace(); } }
-	 * 
-	 * return vo; }
-	 */
 
 	public BoardVo updateView(Long no, String title, String contents) {
 		BoardVo vo = null;

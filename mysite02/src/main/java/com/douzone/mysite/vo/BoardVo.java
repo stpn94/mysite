@@ -7,6 +7,7 @@ public class BoardVo {
 	private String contents;
 	private String redDate;
 	private int hit;
+	private String file;
 	private int groupNo;
 	private int orderNo;
 	private int depth;
@@ -94,11 +95,17 @@ public class BoardVo {
 		this.userName = userName;
 	}
 
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", redDate=" + redDate + ", hit="
-				+ hit + ", groupNo=" + groupNo + ", orderNo=" + orderNo + ", depth=" + depth + ", userNo=" + userNo
-				+ ", userName=" + userName + "]";
+		return String.format("BoardVo [no=%s, title=%s, contents=%s, redDate=%s, hit=%s, file=%s, groupNo=%s, orderNo=%s, depth=%s, userNo=%s, userName=%s]", no, title, contents, redDate, hit, file, groupNo, orderNo, depth, userNo, userName);
 	}
 
 }

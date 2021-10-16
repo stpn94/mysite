@@ -25,6 +25,9 @@
 						<td class="label">제목</td>
 						<td>${title}</td>
 					</tr>
+					<c:if test="${file ne null}">
+						<a href="${pageContext.request.contextPath}/board?a=filedown&downFile=${file}">${file}</a>
+					</c:if>
 					<tr>
 						<td class="label">내용</td>
 						<td>
@@ -50,9 +53,6 @@
 							<a href="${pageContext.request.contextPath}/board?a=replyform&no=${no}">답글 달기</a>
 						</c:when>
 					</c:choose>
-
-
-
 				</div>
 			</div>
 		</div>

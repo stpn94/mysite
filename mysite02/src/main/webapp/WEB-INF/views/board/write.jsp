@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>​
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>​
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	${pageContext.request.contextPath}
 	<!-- writeform 에서 왔음 -->
 	<div id="container">
 		<div id="header">
@@ -18,7 +19,7 @@
 		<div id="content">
 			<div id="board">
 
-				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board" enctype="multipart/form-data">
 					<!-- writeAction 으로 파라미터들 가지고 간다. -->
 					<input type="hidden" name="a" value="write">
 					<table class="tbl-ex">
@@ -38,10 +39,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="td_left">
-								<label for="BOARD_FILE">파일 첨부</label>
-							</td>
-							<td class="td_right">
+							<td class="label">파일 첨부</td>
+							<td>
 								<input name="file" type="file" id="file" />
 							</td>
 						</tr>
