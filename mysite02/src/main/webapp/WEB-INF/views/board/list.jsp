@@ -80,14 +80,14 @@
 				<div class="pager">
 					<ul>
 						<c:if test="${ curPageNum > 5 && !empty kwd }">
-							<li><a href="${pageContext.request.contextPath}/board?&a=board&page=${ blockStartNum - 1 }&kwd=${ kwd }">◀</a></li>
+							<li><a href="${pageContext.request.contextPath}/board?&a=board&page=${ groupStartNum - 1 }&kwd=${ kwd }">◀</a></li>
 						</c:if>
 
 						<c:if test="${ curPageNum > 5 }">
-							<li><a href="${pageContext.request.contextPath}/board?a=board&page=${ blockStartNum - 1 }">◀</a></li>
+							<li><a href="${pageContext.request.contextPath}/board?a=board&page=${ groupStartNum - 1 }">◀</a></li>
 						</c:if>
 
-						<c:forEach var="i" begin="${ blockStartNum }" end="${ blockLastNum }">
+						<c:forEach var="i" begin="${ groupStartNum }" end="${ groupLastNum }">
 							<c:choose>
 								<c:when test="${ i > lastPageNum }">
 									<li>${ i }</li>
@@ -104,12 +104,12 @@
 							</c:choose>
 						</c:forEach>
 
-						<c:if test="${ lastPageNum > blockLastNum && !empty kwd }">
-							<li><a href="${pageContext.request.contextPath}/board?a=search&page=${ blockLastNum + 1 }&kwd=${ kwd }">▶</a></li>
+						<c:if test="${ lastPageNum > groupLastNum && !empty kwd }">
+							<li><a href="${pageContext.request.contextPath}/board?a=search&page=${ groupLastNum + 1 }&kwd=${ kwd }">▶</a></li>
 						</c:if>
 
-						<c:if test="${ lastPageNum > blockLastNum }">
-							<li><a href="${pageContext.request.contextPath}/board?a=board&page=${ blockLastNum + 1 }">▶</a></li>
+						<c:if test="${ lastPageNum > groupLastNum }">
+							<li><a href="${pageContext.request.contextPath}/board?a=board&page=${ groupLastNum + 1 }">▶</a></li>
 						</c:if>
 					</ul>
 				</div>

@@ -7,22 +7,15 @@
 		<artifactId>mysite</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<artifactId>mysite02</artifactId>
 	<packaging>war</packaging>
+
 	<dependencies>
-		<!-- 마리아 DB 드라이버 -->
+		<!-- MariaDB JDBC Driver -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>2.7.2</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
-		<dependency>
-			<groupId>servlets.com</groupId>
-			<artifactId>cos</artifactId>
-			<version>05Nov2002</version>
 		</dependency>
 
 		<!-- jstl -->
@@ -31,7 +24,15 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+		</dependency>
+
 	</dependencies>
+
 	<build>
 		<finalName>mysite02</finalName>
 		<plugins>
@@ -45,7 +46,7 @@
 					<password>manager</password>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
+
 </project>

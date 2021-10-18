@@ -20,57 +20,57 @@ public class ListAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		UserVo authUser = null;
-		int cureentPage = 0;
+		Paging paging = new Paging();
+		
+		String keyword = request.getParameter("kwd");
+		String cp = request.getParameter("page");
+		
+		int currentPage = 0;
 		int first = 0;
 		int second = 0;
-		int blockStartNum = 0;
-		int blockLastNum = 0;
+		int groupStartNum = 0;
+		int groupLastNum = 0;
 		int lastPageNum = 0;
 		int pagesize = Paging.getPagecount();
-		Paging paging = new Paging();
 
-		String searchValue = request.getParameter("kwd");
 
-		if (searchValue == null || searchValue.isEmpty()) {
-			searchValue = "";
+		if (keyword == null || keyword.isEmpty()) {
+			keyword = "";
 		}
-		String cp = request.getParameter("page");
-
+		
 		
 		if (cp == null || "null".equals(cp)) {
-			/* 최초 홈페이지 입장 */
-			paging.makeBlock(cureentPage);
-			paging.makeLastPageNum(searchValue);
-			blockStartNum = paging.getBlockStartNum(); // 그룹 번호
-			blockLastNum = paging.getBlockLastNum();
-			lastPageNum = paging.getLastPageNum();
-			request.setAttribute("curPageNum", cureentPage);
-		} else {
-			 /* 페이징 버튼을 눌렸을때 */
-			cureentPage = Integer.parseInt(request.getParameter("page"));
-			paging.makeBlock(cureentPage);
-			paging.makeLastPageNum(searchValue);
-			blockStartNum = paging.getBlockStartNum(); // 그룹 번호
-			blockLastNum = paging.getBlockLastNum();
-			lastPageNum = paging.getLastPageNum();
-			request.setAttribute("curPageNum", cureentPage);
+			
+		}else {
+			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
-		request.setAttribute("blockStartNum", blockStartNum);
-		request.setAttribute("blockLastNum", blockLastNum);
+		
+		paging.setGroup(currentPage);
+		groupStartNum = paging.getGroupStartNum(); // 그룹 번호
+		groupLastNum = paging.getGroupLastNum();
+		
+		paging.setLastPageNum(keyword);
+		lastPageNum = paging.getLastPageNum();
+	
+
+		if (currentPage != 0) {
+			first = (currentPage * pagesize) - pagesize;
+		} else {
+			first = (currentPage * pagesize);
+		}
+		second = (currentPage * pagesize) + (pagesize - 1);
+
+		List<BoardVo> list = new BoardDao().findAllSearch(keyword, first, pagesize);
+		
+		request.setAttribute("curPageNum", currentPage);
+		request.setAttribute("groupStartNum", groupStartNum);
+		request.setAttribute("groupLastNum", groupLastNum);
 		request.setAttribute("lastPageNum", lastPageNum); // lastPageNum = 6일 때, 7, 8, 9, 10는 링크를 활성화 하지 못함
-
-		if (cureentPage != 0) {
-			first = (cureentPage * pagesize) - pagesize;
-		} else {
-			first = (cureentPage * pagesize);
-		}
-		second = (cureentPage * pagesize) + (pagesize - 1);
-
-		List<BoardVo> list = new BoardDao().findAllSearch(searchValue, first, pagesize);
-
 		request.setAttribute("list", list);
+		
 		MvcUtil.forward("board/list", request, response);
 
+		
 	}
 
 }

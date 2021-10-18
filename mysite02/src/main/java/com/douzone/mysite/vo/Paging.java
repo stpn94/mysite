@@ -4,28 +4,28 @@ import com.douzone.mysite.dao.BoardDao;
 
 public class Paging {
 	private final static int pageCount = 5;
-	private int blockStartNum = 0;
-	private int blockLastNum = 0;
+	private int groupStartNum = 0;
+	private int groupLastNum = 0;
 	private int lastPageNum = 0;
 
 	public static int getPagecount() {
 		return pageCount;
 	}
 
-	public int getBlockStartNum() {
-		return blockStartNum;
+	public int getGroupStartNum() {
+		return groupStartNum;
 	}
 
-	public void setBlockStartNum(int blockStartNum) {
-		this.blockStartNum = blockStartNum;
+	public void setGroupStartNum(int groupStartNum) {
+		this.groupStartNum = groupStartNum;
 	}
 
-	public int getBlockLastNum() {
-		return blockLastNum;
+	public int getGroupLastNum() {
+		return groupLastNum;
 	}
 
-	public void setBlockLastNum(int blockLastNum) {
-		this.blockLastNum = blockLastNum;
+	public void setGroupLastNum(int groupLastNum) {
+		this.groupLastNum = groupLastNum;
 	}
 
 	public int getLastPageNum() {
@@ -36,15 +36,15 @@ public class Paging {
 		this.lastPageNum = lastPageNum;
 	}
 
-	public void makeBlock(int curPage) {
-		int blockNum = 0;
+	public void setGroup(int curPage) {
+		int groupNum = 0;
 
-		blockNum = (int) Math.floor((curPage - 1) / pageCount);
-		blockStartNum = (pageCount * blockNum) + 1;
-		blockLastNum = blockStartNum + (pageCount - 1);
+		groupNum = (int) Math.floor((curPage - 1) / pageCount);
+		groupStartNum = (pageCount * groupNum) + 1;
+		groupLastNum = groupStartNum + (pageCount - 1);
 	}
 
-	public void makeLastPageNum() {
+	public void setLastPageNum() {
 
 		int total = new BoardDao().findAllCount();
 
@@ -56,7 +56,7 @@ public class Paging {
 	}
 
 	// 검색을 했을 때 총 페이지의 마지막 번호
-	public void makeLastPageNum(String kwd) {
+	public void setLastPageNum(String kwd) {
 
 		int total = new BoardDao().findAllCount();
 
