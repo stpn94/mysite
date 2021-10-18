@@ -77,7 +77,7 @@ public class BoardDao {
 			
 			System.out.println("findByNo start");
 			
-			String sql = "select a.no, a.title, a.contents, a.reg_date, a.hit, a.group_no, a.order_no, a.depth, b.no, b.name from"
+			String sql = "select a.no, a.title, a.contents, a.reg_date, a.hit, a.group_no, a.order_no, a.depth, a.file, b.no, b.name from"
 					+ " board a, user b" + " where a.user_no = b.no " + " and a.no=?";
 			
 			pstmt = conn.prepareStatement(sql);
@@ -93,8 +93,9 @@ public class BoardDao {
 				int groupNo = rs.getInt(6);
 				int orderNo = rs.getInt(7);
 				int depths = rs.getInt(8);
-				Long userNo = rs.getLong(9);
-				String userName = rs.getString(10);
+				String file = rs.getString(9);
+				Long userNo = rs.getLong(10);
+				String userName = rs.getString(11);
 
 				vo = new BoardVo();
 				vo.setNo(no);
@@ -105,6 +106,7 @@ public class BoardDao {
 				vo.setGroupNo(groupNo);
 				vo.setOrderNo(orderNo);
 				vo.setDepth(depths);
+				vo.setFile(file);
 				vo.setUserNo(userNo);
 				vo.setUserName(userName);
 
@@ -169,23 +171,26 @@ public class BoardDao {
 	public Boolean insert(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		System.out.println(vo.getTitle()+"타이틀이왜");
 		boolean result = false;
 
 		try {
 			conn = getConnection();
 			System.out.println("Boardinsert start");
-			String sql = " insert into board values(null , ? , ? ,  sysdate(), ? , ? ,? , ? ,? )";
+			String sql = " insert into board(no, title, contents, reg_date, hit, file, group_no, order_no, depth, user_no)"
+								  + " values(null, ?, ?, sysdate(), ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setInt(3, vo.getHit());
-			pstmt.setInt(4, vo.getGroupNo());
-			pstmt.setInt(5, vo.getOrderNo());
-			pstmt.setInt(6, vo.getDepth());
-			pstmt.setLong(7, vo.getUserNo());
+			pstmt.setString(4, vo.getFile());
+			pstmt.setInt(5, vo.getGroupNo());
+			pstmt.setInt(6, vo.getOrderNo());
+			pstmt.setInt(7, vo.getDepth());
+			pstmt.setLong(8, vo.getUserNo());
+			System.out.println(sql);
 			int count = pstmt.executeUpdate();
 			result = count == 1;
-
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {
@@ -413,7 +418,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("updateView start");
-			String sql = "update board set title = ? , contents = ?  where no = ?";
+			String sql = "update board set title = ? , contents = ? where no = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, contents);

@@ -11,9 +11,6 @@ public class BoardActionFactory extends ActionFactory {
 	public Action getAction(String actionName) {
 		Action action = null;
 
-		System.out.println("Go to" + actionName);
-		System.out.println("Go to" + actionName);
-		System.out.println("Go to" + actionName);
 		/* 하나하나씩 */
 		if ("view".equals(actionName)) { //글 내용 보기
 			action = new ViewAction();

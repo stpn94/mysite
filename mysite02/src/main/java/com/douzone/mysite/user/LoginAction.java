@@ -31,7 +31,7 @@ public class LoginAction implements Action {
 		
 		HttpSession session =  request.getSession(true);
 		session.setAttribute("authUser", userVo);
-
+		System.out.println(session.getAttribute("authUser"));
 		
 		// main으로 리다이렉트!
 		MvcUtil.redirect(request.getContextPath(), request, response);

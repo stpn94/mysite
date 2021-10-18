@@ -25,9 +25,14 @@
 						<td class="label">제목</td>
 						<td>${title}</td>
 					</tr>
-					<c:if test="${file ne null}">
-						<a href="${pageContext.request.contextPath}/board?a=filedown&downFile=${file}">${file}</a>
-					</c:if>
+					<tr>
+						<td class="label">첨부</td>
+						<td>
+						<c:if test="${file ne null}">
+							<a href="${pageContext.request.contextPath}/board?a=filedown&downFile=${file}">${file}</a>
+						</c:if>
+						</td>
+					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>

@@ -26,6 +26,7 @@ public class ViewAction implements Action {
 
 		request.setAttribute("title", boardvo.getTitle()); 		// System.out.println("no:" + no);
 		request.setAttribute("contents", boardvo.getContents());
+		request.setAttribute("file", boardvo.getFile());
 		request.setAttribute("no", no);
 		request.setAttribute("userNo", boardvo.getUserNo());
 

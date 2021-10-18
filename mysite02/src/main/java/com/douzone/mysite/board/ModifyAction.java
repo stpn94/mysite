@@ -15,11 +15,11 @@ public class ModifyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ModifyAction start");
+		System.out.println("ModifyAction start===========");
 		Long no = 	Long.parseLong(request.getParameter("no"));
 		String title = 	request.getParameter("title");
-		String contents = 	request.getParameter("contents");
-		BoardVo boardvo = new BoardDao().updateView(no , title , contents);
+		String content = 	request.getParameter("content");
+		BoardVo boardvo = new BoardDao().updateView(no , title , content);
 		MvcUtil.redirect(request.getContextPath() + "/board?a=board", request, response);
 		
 		

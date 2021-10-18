@@ -18,10 +18,8 @@
 		</div>
 		<div id="content">
 			<div id="board">
-
-				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board" enctype="multipart/form-data">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board?a=write" enctype="multipart/form-data" name = "writeform">
 					<!-- writeAction 으로 파라미터들 가지고 간다. -->
-					<input type="hidden" name="a" value="write">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -29,13 +27,13 @@
 						<tr>
 							<td class="label">제목</td>
 							<td>
-								<input type="text" name="title" value="">
+								<input type="text" name="title" id="title">
 							</td>
 						</tr>
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="contents"></textarea>
+								<textarea id="content" name="contents" ></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -50,8 +48,6 @@
 						<input type="submit" value="등록">
 					</div>
 				</form>
-
-
 			</div>
 		</div>
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.douzone.mysite.dao.BoardDao;
 import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.Paging;
+import com.douzone.mysite.vo.UserVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
@@ -16,119 +18,60 @@ public class ListAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("ListAction start");
 
-		int page = 1;
-		int limit = 5;
-		
-		// 검색어
+		UserVo authUser = null;
+		int cureentPage = 0;
+		int first = 0;
+		int second = 0;
+		int blockStartNum = 0;
+		int blockLastNum = 0;
+		int lastPageNum = 0;
+		int pagesize = Paging.getPagecount();
+		Paging paging = new Paging();
+
 		String searchValue = request.getParameter("kwd");
-		
+
 		if (searchValue == null || searchValue.isEmpty()) {
 			searchValue = "";
 		}
+		String cp = request.getParameter("page");
+
 		
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
+		if (cp == null || "null".equals(cp)) {
+			/* 최초 홈페이지 입장 */
+			paging.makeBlock(cureentPage);
+			paging.makeLastPageNum(searchValue);
+			blockStartNum = paging.getBlockStartNum(); // 그룹 번호
+			blockLastNum = paging.getBlockLastNum();
+			lastPageNum = paging.getLastPageNum();
+			request.setAttribute("curPageNum", cureentPage);
+		} else {
+			 /* 페이징 버튼을 눌렸을때 */
+			cureentPage = Integer.parseInt(request.getParameter("page"));
+			paging.makeBlock(cureentPage);
+			paging.makeLastPageNum(searchValue);
+			blockStartNum = paging.getBlockStartNum(); // 그룹 번호
+			blockLastNum = paging.getBlockLastNum();
+			lastPageNum = paging.getLastPageNum();
+			request.setAttribute("curPageNum", cureentPage);
 		}
-		
-		//총 리스트 개수
-		int listCount = new BoardDao().findAllCount();
-		
-		//21.0/5 = 5
-		int maxPage = (int) Math.ceil((double)listCount/limit);
-		
-		// 1 page 1~5, 2page 6~10, 11~15,..
-		// 11page 51~55,
-		// [이전] [1][2][3][4][5][6][7][8][9][10] 다음
-		// [이전] [11][12][13][14][15][16][17][18][19][20] 다음
-		// [이전] [21][22][23] 다음
-		int startPage = (((int)((double)page/limit +0.9)) -1)*5+1;
-		int endPage = startPage +5 -1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
+		request.setAttribute("blockStartNum", blockStartNum);
+		request.setAttribute("blockLastNum", blockLastNum);
+		request.setAttribute("lastPageNum", lastPageNum); // lastPageNum = 6일 때, 7, 8, 9, 10는 링크를 활성화 하지 못함
+
+		if (cureentPage != 0) {
+			first = (cureentPage * pagesize) - pagesize;
+		} else {
+			first = (cureentPage * pagesize);
 		}
-		
-		List<BoardVo> list = new BoardDao().findAllSearch(searchValue, startPage, limit);
-		
-//		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);		
-		
-		request.setAttribute("articleList", list);
-		request.setAttribute("currentPage", page);
-		request.setAttribute("startNum", startPage);
-		request.setAttribute("lastNum", endPage);
-		request.setAttribute("lastPageNum", maxPage); // lastPageNum = 6일 때, 7, 8, 9, 10는 링크를 활성화 하지 못함
-		
+		second = (cureentPage * pagesize) + (pagesize - 1);
+
+		List<BoardVo> list = new BoardDao().findAllSearch(searchValue, first, pagesize);
+
+		request.setAttribute("list", list);
 		MvcUtil.forward("board/list", request, response);
+
 	}
 
 }
 
-class PageInfo {
-	private int page;
-	private int maxPage;
-	private int startPage;
-	private int endPage;
-	private int listCount;
-
-	public PageInfo() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public PageInfo(int page, int maxPage, int startPage, int endPage, int listCount) {
-		super();
-		this.page = page;
-		this.maxPage = maxPage;
-		this.startPage = startPage;
-		this.endPage = endPage;
-		this.listCount = listCount;
-	}
-
-	public int getPage() {
-		return page;
-	}
-
-	public void setPage(int page) {
-		this.page = page;
-	}
-
-	public int getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(int maxPage) {
-		this.maxPage = maxPage;
-	}
-
-	public int getStartPage() {
-		return startPage;
-	}
-
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
-	}
-
-	public int getEndPage() {
-		return endPage;
-	}
-
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
-	}
-
-	public int getListCount() {
-		return listCount;
-	}
-
-	public void setListCount(int listCount) {
-		this.listCount = listCount;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("PageInfo [page=%s, maxPage=%s, startPage=%s, endPage=%s, listCount=%s]", page, maxPage,
-				startPage, endPage, listCount);
-	}
-
-}

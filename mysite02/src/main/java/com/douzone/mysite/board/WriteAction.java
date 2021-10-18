@@ -35,20 +35,19 @@ public class WriteAction implements Action {
 		MultipartRequest multi = null;
 		System.out.println("진짜 폴더 경로 : " + realFolder);
 
-		System.out.println("request getContentType : " + request.getContentType());
-
 		// MultipartRequest 디펜던시 받아와라잉
 			multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
+			
 			HttpSession session = request.getSession();
+			
 			UserVo authUser = (UserVo) session.getAttribute("authUser"); //session에서 아이디 정보 가져오기
-
+			
 			Integer maxGroupNo = new BoardDao().findMaxGroupNo(); // 그룹넘버 가져와야함
 
 			System.out.println("maxGroupNo:" + maxGroupNo);
-
 			BoardVo boardVo = new BoardVo();
-			boardVo.setTitle(request.getParameter("title"));
-			boardVo.setContents(request.getParameter("contents"));
+			boardVo.setTitle(multi.getParameter("title"));
+			boardVo.setContents(multi.getParameter("contents"));
 			boardVo.setHit(0);
 			boardVo.setFile(multi.getOriginalFileName(((String) multi.getFileNames().nextElement())));
 			boardVo.setDepth(0); // 간격
