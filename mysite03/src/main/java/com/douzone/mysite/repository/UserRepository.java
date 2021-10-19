@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.douzone.mysite.exception.UserRepositoryException;
 import com.douzone.mysite.vo.UserVo;
 
 @Repository
@@ -97,7 +98,7 @@ public class UserRepository {
 		return result;
 	}
 
-	public UserVo findByNo(Long no) {
+	public UserVo findByNo(Long no) throws UserRepositoryException {
 		UserVo vo = null;
 
 		Connection conn = null;
@@ -123,7 +124,7 @@ public class UserRepository {
 				vo.setGender(rs.getString(4));
 			}
 		} catch (SQLException e) {
-			System.out.println("error:" + e);
+			throw new UserRepositoryException(e.toString());
 		} finally {
 			try {
 				if (rs != null) {
