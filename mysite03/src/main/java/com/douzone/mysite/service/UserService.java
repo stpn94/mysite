@@ -8,6 +8,7 @@ import com.douzone.mysite.vo.UserVo;
 
 @Service
 public class UserService {
+	
 	@Autowired
 	private UserRepository userRepository;
 

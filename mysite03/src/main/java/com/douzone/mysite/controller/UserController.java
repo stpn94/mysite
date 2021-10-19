@@ -15,6 +15,7 @@ import com.douzone.mysite.vo.UserVo;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
 	@Autowired
 	private UserService userService;
 	
