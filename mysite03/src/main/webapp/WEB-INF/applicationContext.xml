@@ -15,7 +15,7 @@
 
 
       <!-- 골뱅이 스캐닝 -->
-	<context:component-scan base-package="com.douzone.guetbook.repository">
+	<context:component-scan base-package="com.douzone.mysite.repository">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
