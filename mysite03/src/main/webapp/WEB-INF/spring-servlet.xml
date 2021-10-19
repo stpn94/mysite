@@ -13,9 +13,5 @@
 	<context:annotation-config />
 	<context:component-scan base-package="com.douzone.guestbook.controller" />
 
-	<!-- 이 작업들을 어노테이션에서 함!! <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" 
-		> <property name="mappings"> <props> <prop key="/member">memberController</prop> 
-		</props> </property> </bean> <bean id=" memberController" class= "com.example.controller.MemberController"> 
-		</bean> -->
 
 </beans>
