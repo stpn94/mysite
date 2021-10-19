@@ -24,7 +24,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " select no, name " + "   from user " + "  where email=?" + "    and password=?";
+			String sql = " select no, name from user where email=? and password=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, email);
@@ -70,7 +70,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " insert " + "   into user " + " values(null, ?, ?, ?, ?, now())";
+			String sql = " insert into user values(null, ?, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, vo.getName());
@@ -108,7 +108,7 @@ public class UserRepository {
 		try {
 			conn = getConnection();
 
-			String sql = " select no, name, email, gender " + "   from user " + "  where no=?";
+			String sql = " select no, name, email, gender from user where no=?";
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setLong(1, no);
@@ -153,14 +153,14 @@ public class UserRepository {
 			conn = getConnection();
 
 			if ("".equals(vo.getPassword())) {
-				String sql = " update user " + "    set name=?, gender=?" + "  where no=?";
+				String sql = " update user  set name=?, gender=?  where no=?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getName());
 				pstmt.setString(2, vo.getGender());
 				pstmt.setLong(3, vo.getNo());
 			} else {
-				String sql = " update user " + "    set name=?, gender=?, password=?" + "  where no=?";
+				String sql = " update user set name=?, gender=?, password=? where no=?";
 				pstmt = conn.prepareStatement(sql);
 
 				pstmt.setString(1, vo.getName());
