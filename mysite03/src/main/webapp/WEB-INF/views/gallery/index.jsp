@@ -45,7 +45,7 @@ $(function(){
 </head>
 <body>
 	<div id="container">
-		<c:import url="/WEB-INF/views/include/header.jsp" />
+		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="gallery">
 				<div>
@@ -66,7 +66,7 @@ $(function(){
 						
 						
 						<li>
-							<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im2.jpg'"
+							<a	href="${pageContext.request.contextPath }/assets/gallery-examples/im2.jpg"
 								data-lightbox="gallery"
 								class="image"
 								style="background-image:url('${pageContext.request.contextPath }/assets/gallery-examples/im2.jpg')">&nbsp;</a>
@@ -235,10 +235,8 @@ $(function(){
   				</form>
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/include/navigation.jsp">
-			<c:param name="menu" value="gallery"/>
-		</c:import>
-		<c:import url="/WEB-INF/views/include/footer.jsp" />
+		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
+		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
 </body>
 </html>

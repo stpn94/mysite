@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.mysite.repository.BoardRepository;
 import com.douzone.mysite.vo.BoardVo;
+
+
 @Service
 public class BoardService {
 	

@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.douzone.mysite.vo.BoardVo;
 
+@Repository
 public class BoardRepository {
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
@@ -541,6 +544,5 @@ public class BoardRepository {
 		}
 
 	}
-
 
 }

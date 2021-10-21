@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -13,15 +14,59 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
-	<aop:aspectj-autoproxy/>
-	<context:annotation-config />	
-		
+	<aop:aspectj-autoproxy />
+	<context:annotation-config />
+
+	<!-- Connection Pool DataSource -->
+	<bean
+		id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property
+			name="driverClassName"
+			value="org.mariadb.jdbc.Driver" />
+		<property
+			name="url"
+			value="jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8" />
+		<property
+			name="username"
+			value="webdb" />
+		<property
+			name="password"
+			value="webdb" />
+	</bean>
+
+	<!-- MyBatis SqlSessionFactoryBean -->
+	<bean
+		id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property
+			name="dataSource"
+			ref="dataSource" />
+		<property
+			name="configLocation"
+			value="classpath:mybatis/configuration.xml" />
+	</bean>
+	<!-- MyBatis SqlSessionTemplate -->
+	<bean
+		id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg
+			index="0"
+			ref="sqlSessionFactory" />
+	</bean>
 
 	<context:annotation-config />
-	<context:component-scan base-package="com.douzone.mysite.service, com.douzone.mysite.repository">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+	<context:component-scan
+		base-package="com.douzone.mysite.service, com.douzone.mysite.repository">
+		<context:include-filter
+			type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+		<context:include-filter
+			type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:include-filter
+			type="annotation"
+			expression="org.springframework.stereotype.Component" />
 	</context:component-scan>
 
 </beans>
