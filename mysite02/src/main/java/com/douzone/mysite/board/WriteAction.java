@@ -20,36 +20,15 @@ public class WriteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/* write.jsp 에서 submit 해서 컨트롤러 거쳐서 왔다. */
-		System.out.println("WriteAction start");
-
-		/* 업로드 */
-		// 파일 사이즈
-		int fileSize = 5 * 1024 * 1024;
-		//폴더 경로 설정
-		String realFolder = "";
-		String saveFolder = "/boardUpload";
-
-		ServletContext context = request.getServletContext();
-		realFolder = context.getRealPath(saveFolder);
-		MultipartRequest multi = null;
-		System.out.println("진짜 폴더 경로 : " + realFolder);
-
-		// MultipartRequest 디펜던시 받아와라잉
-			multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 			
 			HttpSession session = request.getSession();
-			
 			UserVo authUser = (UserVo) session.getAttribute("authUser"); //session에서 아이디 정보 가져오기
 			
 			Integer maxGroupNo = new BoardDao().findMaxGroupNo(); // 그룹넘버 가져와야함
-
-			System.out.println("maxGroupNo:" + maxGroupNo);
 			BoardVo boardVo = new BoardVo();
-			boardVo.setTitle(multi.getParameter("title"));
-			boardVo.setContents(multi.getParameter("contents"));
+			boardVo.setTitle(request.getParameter("title"));
+			boardVo.setContents(request.getParameter("contents"));
 			boardVo.setHit(0);
-			boardVo.setFile(multi.getOriginalFileName(((String) multi.getFileNames().nextElement())));
 			boardVo.setDepth(0); // 간격
 			boardVo.setGroupNo(maxGroupNo + 1); // 그룹넘버에 1플러스 해서 새로운 그룹 만들기
 			boardVo.setOrderNo(1); // 그룹내 글 순서

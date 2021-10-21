@@ -21,7 +21,6 @@ public class GuestBookDao {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		}
-
 		return conn;
 	}
 

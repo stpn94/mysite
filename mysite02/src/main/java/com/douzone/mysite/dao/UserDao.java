@@ -20,7 +20,6 @@ public class UserDao {
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패:" + e);
 		}
-
 		return conn;
 	}
 
@@ -161,12 +160,10 @@ public class UserDao {
 			System.out.println("updateUserNamePassword start");
 			String sql = "update user set name = ? , password = ? ,  gender = ? where no = ?";
 			pstmt = conn.prepareStatement(sql);
-
 			pstmt.setString(1, name);
 			pstmt.setString(2, password);
 			pstmt.setString(3, gender);
 			pstmt.setLong(4, no);
-
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 

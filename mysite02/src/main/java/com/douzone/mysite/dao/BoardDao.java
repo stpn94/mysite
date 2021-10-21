@@ -33,16 +33,15 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("insertReply start");
-			String sql = " insert into board values(null , ? , ? ,  sysdate(), ? ,?, ? ,? , ? ,? )";
+			String sql = " INSERT INTO board VALUES(null, ?, ?, sysdate(), ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setInt(3, vo.getHit());
-			pstmt.setString(4, vo.getFile());
-			pstmt.setInt(5, vo.getGroupNo());
-			pstmt.setInt(6, vo.getOrderNo());
-			pstmt.setInt(7, vo.getDepth());
-			pstmt.setLong(8, vo.getUserNo());
+			pstmt.setInt(4, vo.getGroupNo());
+			pstmt.setInt(5, vo.getOrderNo());
+			pstmt.setInt(6, vo.getDepth());
+			pstmt.setLong(7, vo.getUserNo());
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 
@@ -74,12 +73,11 @@ public class BoardDao {
 
 		try {
 			conn = getConnection();
-			
+
 			System.out.println("findByNo start");
-			
-			String sql = "select a.no, a.title, a.contents, a.reg_date, a.hit, a.group_no, a.order_no, a.depth, a.file, b.no, b.name from"
-					+ " board a, user b" + " where a.user_no = b.no " + " and a.no=?";
-			
+
+			String sql = "SELECT a.no, a.title, a.contents, a.reg_date, a.hit, a.group_no, a.order_no, a.depth, b.no, b.name from board a, user b where a.user_no = b.no and a.no=?";
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setLong(1, Boardno);
 			rs = pstmt.executeQuery();
@@ -93,9 +91,8 @@ public class BoardDao {
 				int groupNo = rs.getInt(6);
 				int orderNo = rs.getInt(7);
 				int depths = rs.getInt(8);
-				String file = rs.getString(9);
-				Long userNo = rs.getLong(10);
-				String userName = rs.getString(11);
+				Long userNo = rs.getLong(9);
+				String userName = rs.getString(10);
 
 				vo = new BoardVo();
 				vo.setNo(no);
@@ -106,10 +103,8 @@ public class BoardDao {
 				vo.setGroupNo(groupNo);
 				vo.setOrderNo(orderNo);
 				vo.setDepth(depths);
-				vo.setFile(file);
 				vo.setUserNo(userNo);
 				vo.setUserName(userName);
-
 			}
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
@@ -171,24 +166,21 @@ public class BoardDao {
 	public Boolean insert(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		System.out.println(vo.getTitle()+"타이틀이왜");
+		System.out.println(vo.getTitle() + "타이틀이왜");
 		boolean result = false;
 
 		try {
 			conn = getConnection();
 			System.out.println("Boardinsert start");
-			String sql = " insert into board(no, title, contents, reg_date, hit, file, group_no, order_no, depth, user_no)"
-								  + " values(null, ?, ?, sysdate(), ?, ?, ?, ?, ?, ?)";
+			String sql = " insert into board values(null, ?, ?, sysdate(), ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
 			pstmt.setInt(3, vo.getHit());
-			pstmt.setString(4, vo.getFile());
-			pstmt.setInt(5, vo.getGroupNo());
-			pstmt.setInt(6, vo.getOrderNo());
-			pstmt.setInt(7, vo.getDepth());
-			pstmt.setLong(8, vo.getUserNo());
-			System.out.println(sql);
+			pstmt.setInt(4, vo.getGroupNo());
+			pstmt.setInt(5, vo.getOrderNo());
+			pstmt.setInt(6, vo.getDepth());
+			pstmt.setLong(7, vo.getUserNo());
 			int count = pstmt.executeUpdate();
 			result = count == 1;
 		} catch (SQLException e) {
@@ -293,9 +285,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("findAll start");
-			String sql = " select a.no ,  a.title  , a.contents , a.reg_date, a.depth , a.hit , b.no as user_no , b.name"
-					+ " from board a ,user b" + " where a.user_no = b.no"
-					+ " order by a.group_no  desc  , a.order_no asc limit ? , ?";
+			String sql = " select a.no ,  a.title  , a.contents , a.reg_date, a.depth , a.hit , b.no as user_no , b.name from board a ,user b where a.user_no = b.no order by a.group_no  desc  , a.order_no asc limit ? , ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, first);
 			pstmt.setInt(2, second);
@@ -355,9 +345,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("findAllSearch start");
-			String sql = " select a.no ,  a.title  , a.contents , a.reg_date, a.depth , a.hit , b.no as user_no , b.name"
-					+ " from board a ,user b" + " where a.user_no = b.no" + " and a.title like '%" + searchValue + "%'"
-					+ " order by  a.group_no  desc  , a.order_no asc limit ? , ?";
+			String sql = " select a.no ,  a.title  , a.contents , a.reg_date, a.depth , a.hit , b.no as user_no , b.name from board a ,user b where a.user_no = b.no and a.title like '%" + searchValue + "%' order by  a.group_no  desc, a.order_no asc limit ? , ?";
 			System.out.println(sql);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, first);
@@ -407,7 +395,6 @@ public class BoardDao {
 
 		return result;
 	}
-
 
 	public BoardVo updateView(Long no, String title, String contents) {
 		BoardVo vo = null;
