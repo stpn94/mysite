@@ -9,7 +9,7 @@ public class WebUtil {
 		try {
 			urlEncode = URLEncoder.encode(url, encode);
 		} catch (UnsupportedEncodingException e) {
-
+			
 			throw new RuntimeException(e);
 		}
 

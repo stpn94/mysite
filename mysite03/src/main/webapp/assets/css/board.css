@@ -1,8 +1,10 @@
-@chatset "UTF-8";
+@CHARSET "UTF-8";
 @import "mysite.css";
 
-#board { margin:20px auto;	width:550px; }
-
+#board {
+	margin:20px auto;
+	width:550px;
+}
 
 #search_form {
 	width:100%;
@@ -96,7 +98,7 @@ div.bottom {
 
 div.bottom a { 
 	text-decoration:none; 
-	display:block;
+	dispaly:block;
 }
 
 a#new-book	 { 
@@ -119,6 +121,8 @@ a#new-book	 {
 	cursor: pointer	
 }
 
+.board-form .bottom a.l { float:left; }
+
 .board-form .bottom a {
 	margin-left: 10px;
 	padding:10px 20px 11px 20px 
@@ -128,7 +132,7 @@ a.del	{
 	display:block;
 	width:20px;
 	height:20px; 
-	background:url("/mysite02/assets/images/recycle.png") no-repeat 0 0;
+	background:url("/mysite2/assets/images/recycle.png") no-repeat 0 0;
 	font-size:0;
 }
 
