@@ -65,19 +65,20 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 7. admin일 경우
 		// 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기 ("USER","ADMIN")
 		String role = auth.role().toString();
+		
+		// 8. 권한 체크
+		/* (6번 결과와 7번결과를 비교하기) */
+		//		과제
 		System.out.println("AuthInterceptor : " + role);
 		if ("ADMIN".equals(role)) {
 			// admin임을 알 수 있는 조건을 작성한다.
 			// ex) 서비스의 id가 root이면 admin이다.
-			if ("ADMIN".equals(authUser.getRole()) == false) { // admin이 아니므로 return false
+			if (!"ADMIN".equals(authUser.getRole())) { // admin이 아니므로 return false
 				response.sendRedirect(request.getContextPath());
 				return false;
 			}
 		}
 
-		// 8. 권한 체크
-		/* (6번 결과와 7번결과를 비교하기) */
-		//		과제
 		return true;
 	}
 

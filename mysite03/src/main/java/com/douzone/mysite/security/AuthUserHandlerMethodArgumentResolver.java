@@ -18,8 +18,6 @@ import com.douzone.mysite.vo.UserVo;
  * 그걸 알면 @RequestParam 같은 걸 커스텀 해서 만들수 있다.*/
 
 public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
-
-	
 	
 	@Override
 	public Object resolveArgument(

@@ -38,7 +38,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping( "/view/{no}" )
-	public String view( @PathVariable( "no" ) Long no, Model model ) {
+	public String view( 
+			@PathVariable( "no" ) Long no, 
+			Model model ) {
 		BoardVo boardVo = boardService.getContents( no );
 		model.addAttribute( "boardVo", boardVo );
 		return "board/view";
@@ -128,7 +130,10 @@ public class BoardController {
 	}
 
 	@RequestMapping( value="/reply/{no}" )	
-	public String reply(HttpSession session, @PathVariable( "no" ) Long no, Model model) {
+	public String reply(
+			HttpSession session, 
+			@PathVariable( "no" ) Long no, 
+			Model model) {
 		
 		// 접근제어(Access Control List)
 		UserVo authUser = (UserVo)session.getAttribute("authUser");

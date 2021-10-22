@@ -77,4 +77,9 @@ public class GalleryService {
 		
 		return filename;
 	}
+
+	public String restore(MultipartFile file) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
