@@ -33,16 +33,17 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				.getRequestDispatcher("/WEB-INF/views/user/login.jsp")
 				.forward(request, response);
 			
-			System.out.println("[Loginininter] : " + authUser + " === 이메일,비밀번호 확인실패 로그인 폼으로");
+			System.out.println("[LoginIntercepter] : " + authUser + " === 이메일,비밀번호 확인실패 로그인 폼으로");
 			
 			return false;
 		}
 
 		// session 처리
-		System.out.println("[Loginininter] : " + authUser + " === 이메일,비밀번호 확인하고 session처리 완료");
 
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
+		
+		System.out.println("[LoginIntercepter] : " + authUser + " === 이메일,비밀번호 확인하고 session처리 완료");
 		response.sendRedirect(request.getContextPath());
 		return false;
 	}

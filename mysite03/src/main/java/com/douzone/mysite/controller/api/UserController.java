@@ -13,6 +13,7 @@ import com.douzone.mysite.vo.UserVo;
 @RestController("userControllerApi")
 @RequestMapping("/user/api")
 public class UserController {
+	
 	@Autowired
 	private UserService userService;
 	
@@ -21,4 +22,5 @@ public class UserController {
 		UserVo userVo = userService.getUser(email);
 		return JsonResult.success(userVo != null);
 	}
+	
 }

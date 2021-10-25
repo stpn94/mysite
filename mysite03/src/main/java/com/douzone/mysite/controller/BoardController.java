@@ -60,7 +60,7 @@ public class BoardController {
 	}
 
 	@Auth
-	@RequestMapping(value = "/modify/{no}")
+	@RequestMapping(value = "/modify/{no}", method = RequestMethod.GET)
 	public String modify(
 			@AuthUser UserVo authUser, 
 			@PathVariable("no") Long no, 
@@ -106,7 +106,9 @@ public class BoardController {
 
 	@Auth
 	@RequestMapping(value = "/reply/{no}")
-	public String reply(HttpSession session, @PathVariable("no") Long no, Model model) {
+	public String reply(
+			@PathVariable("no") Long no, 
+			Model model) {
 
 		BoardVo boardVo = boardService.getContents(no);
 		boardVo.setOrderNo(boardVo.getOrderNo() + 1);

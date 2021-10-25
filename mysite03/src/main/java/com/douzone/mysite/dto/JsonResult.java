@@ -2,8 +2,8 @@ package com.douzone.mysite.dto;
 
 public class JsonResult {
 
-	private String result; /* "success" or "fail" */
-	private Object data; /* if success, data set */
+	private String result;  /* "success" or "fail" */
+	private Object data;    /* if success, data set */
 	private String message; /* if fail, message set */
 
 	private JsonResult() {

@@ -13,12 +13,10 @@ public class LogoutInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		String authUser = (String) session.getAttribute("authUser");
-		
-		System.out.println("[Loginininter] : " + authUser + " === 이메일,비밀번호 확인하고 session처리 완료");
 		
 		session.removeAttribute("authUser");
 		session.invalidate();
+		System.out.println("[LogoutIntercepter] : authUser === 이메일,비밀번호 확인하고 session삭제 완료");		
 		response.sendRedirect(request.getContextPath());
 		return false;
 	}

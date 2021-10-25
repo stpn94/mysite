@@ -29,7 +29,11 @@
 					</tr>
 					<c:forEach items="${map.list }" var="vo" varStatus="status">
 						<tr>
+							<!-- 번호 -->
+							<!-- 총 게시글수 - (현재페이지-1)*(리스팅되는 게시물의 수)-반복카운트 -->
 							<td>${map.totalCount - (map.currentPage - 1)* map.listSize - status.index }</td>
+							<!-- 제목 -->
+							<!-- 총 게시글수 - (현재페이지-1)*(리스팅되는 게시물의 수)-반복카운트 -->
 							<c:choose>
 								<c:when test="${vo.depth > 0 }">
 									<td class="left" style="text-align:left; padding-left:${20*vo.depth }px">
@@ -60,14 +64,18 @@
 				</table>
 				<div class="pager">
 					<ul>
+						<!-- 이전 블럭 가장 높은 페이지가 0보다 크면 ◀(전블록 이동 이벤트 이미지) 추가 -->
 						<c:if test="${map.prevPage > 0 }">
 							<li><a href="${pageContext.request.contextPath }/board?p=${map.prevPage }&kwd=${map.keyword }">◀</a></li>
 						</c:if>
+						<!-- (현재블럭의 가장 낮은 페이지) 부터 (현재블럭의 가장낮은 페이지) + (리스팅되는 게시물의 수) - 1 만큼 반복한다.-->
 						<c:forEach begin="${map.beginPage }" end="${map.beginPage + map.listSize - 1 }" var="page">
 							<c:choose>
+								<!-- (현재블럭의 가장 높은 페이지)< 현재페이지 -->
 								<c:when test="${map.endPage < page }">
 									<li>${page }</li>
 								</c:when>
+								<!-- (현재블럭의 가장 높은 페이지)< 현재페이지 -->
 								<c:when test="${map.currentPage == page }">
 									<li class="selected">${page }</li>
 								</c:when>
@@ -76,6 +84,7 @@
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
+						<!-- 다음 블럭 가장 작은 페이지가 0보다 크면 ▶(다음블록 이동 이벤트 이미지) 추가 -->
 						<c:if test="${map.nextPage > 0 }">
 							<li><a href="${pageContext.request.contextPath }/board?p=${map.nextPage }&kwd=${map.keyword }">▶</a></li>
 						</c:if>

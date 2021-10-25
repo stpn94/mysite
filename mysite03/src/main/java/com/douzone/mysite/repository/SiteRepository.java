@@ -11,7 +11,6 @@ public class SiteRepository {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	
     
 	public SiteVo findOne() {
 		
