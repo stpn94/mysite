@@ -35,8 +35,10 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "email", required = true, defaultValue = "") String email, Model model) {
+	public String upload(
+			@RequestParam("file") MultipartFile file,
+			@RequestParam(value = "email", required = true, defaultValue = "") String email,
+			Model model) {
 
 		String url = galleryService.restore(file);
 
@@ -48,7 +50,8 @@ public class AdminController {
 
 
 	@RequestMapping(value = "/main/update", method = RequestMethod.POST)
-	public String updateMain(@ModelAttribute SiteVo vo  ,
+	public String updateMain(
+			@ModelAttribute SiteVo vo  ,
 			@RequestParam("file") MultipartFile file ) {
 
 		String url = galleryService.restore(file);

@@ -7,17 +7,12 @@ public class BoardVo {
 	private String contents;
 	private String redDate;
 	private int hit;
-	private String file;
 	private int groupNo;
 	private int orderNo;
 	private int depth;
 
 	private Long userNo;
 	private String userName;
-
-	
-
-
 
 	public Long getNo() {
 		return no;
@@ -99,17 +94,9 @@ public class BoardVo {
 		this.userName = userName;
 	}
 
-	public String getFile() {
-		return file;
-	}
-
-	public void setFile(String file) {
-		this.file = file;
-	}
-
 	@Override
 	public String toString() {
-		return String.format("BoardVo [no=%s, title=%s, contents=%s, redDate=%s, hit=%s, file=%s, groupNo=%s, orderNo=%s, depth=%s, userNo=%s, userName=%s]", no, title, contents, redDate, hit, file, groupNo, orderNo, depth, userNo, userName);
+		return String.format("BoardVo [no=%s, title=%s, contents=%s, redDate=%s, hit=%s, groupNo=%s, orderNo=%s, depth=%s, userNo=%s, userName=%s]", no, title, contents, redDate, hit, groupNo, orderNo, depth, userNo, userName);
 	}
 
 }

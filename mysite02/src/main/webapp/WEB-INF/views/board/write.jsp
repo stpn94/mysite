@@ -18,7 +18,7 @@
 		</div>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board?a=write" enctype="multipart/form-data" name = "writeform">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath}/board?a=write" name="writeform">
 					<!-- writeAction 으로 파라미터들 가지고 간다. -->
 					<table class="tbl-ex">
 						<tr>
@@ -33,13 +33,7 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="contents" ></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td class="label">파일 첨부</td>
-							<td>
-								<input name="file" type="file" id="file" />
+								<textarea id="content" name="contents"></textarea>
 							</td>
 						</tr>
 					</table>

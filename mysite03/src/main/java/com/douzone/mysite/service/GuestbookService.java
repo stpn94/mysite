@@ -10,6 +10,7 @@ import com.douzone.mysite.vo.GuestbookVo;
 
 @Service
 public class GuestbookService {
+	
 	@Autowired
 	GuestbookRepository guestbookRepository;
 	

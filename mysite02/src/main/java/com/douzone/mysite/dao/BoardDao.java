@@ -33,7 +33,8 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("insertReply start");
-			String sql = " INSERT INTO board VALUES(null, ?, ?, sysdate(), ?, ?, ?, ?, ?)";
+			String sql = " INSERT INTO board(no, title, contents, reg_date, hit, group_no, order_no, depth, user_no)"
+					   + " VALUES (null, ?, ?, sysdate(), ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());
@@ -172,7 +173,8 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 			System.out.println("Boardinsert start");
-			String sql = " insert into board values(null, ?, ?, sysdate(), ?, ?, ?, ?, ?, ?)";
+			String sql = " insert into board(no, title, contents, reg_date, hit, group_no, order_no, depth, user_no) "
+					+ "values(null, ?, ?, sysdate(), ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getTitle());
 			pstmt.setString(2, vo.getContents());

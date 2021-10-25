@@ -27,7 +27,7 @@ public class ListAction implements Action {
 
 		int currentPage = 0;
 		int first = 0;
-		// int second = 0;
+		int second = 0;
 		int groupStartNum = 0;
 		int groupLastNum = 0;
 		int lastPageNum = 0;
@@ -55,7 +55,7 @@ public class ListAction implements Action {
 		} else {
 			first = (currentPage * pagesize);
 		}
-//		second = (currentPage * pagesize) + (pagesize - 1);
+		second = (currentPage * pagesize) + (pagesize - 1);
 
 		List<BoardVo> list = new BoardDao().findAllSearch(keyword, first, pagesize);
 

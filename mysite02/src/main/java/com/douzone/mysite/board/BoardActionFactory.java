@@ -30,10 +30,7 @@ public class BoardActionFactory extends ActionFactory {
 			action = new ModifyFormAction();
 		} else if ("modify".equals(actionName)) {
 			action = new ModifyAction();
-		} else if ("filedown".equals(actionName)) {
-			action = new FileDownAction();
-		}
-
+		} 
 		else {
 
 			/* 게시판 리스트 메인화면 */

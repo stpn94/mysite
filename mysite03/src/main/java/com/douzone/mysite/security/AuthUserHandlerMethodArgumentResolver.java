@@ -63,5 +63,4 @@ public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgum
 
 		return true;
 	}
-
 }
