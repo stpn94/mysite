@@ -62,8 +62,6 @@
 		<property name="basenames">
 			<list>
 				<value>messages/messages_ko</value>
-				<value>messages/messages_jp</value>
-				<value>messages/messages_cn</value>
 			</list>
 		</property>
 	</bean>

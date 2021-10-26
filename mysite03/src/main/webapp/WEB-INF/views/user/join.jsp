@@ -13,51 +13,45 @@
 <script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script>
 	$(function() {
-		$("#btn-check-email")
-				.click(
-						function() {
-							var email = $("#email").val();
-							if (email == '') {
-								return;
-							}
+		btn = $('#btn-check');
+		btn.click(function() {
+			var email = $("#email").val();
+			if (email == "") {
+				return;
+			}
+			$.ajax({
+				url : "/mysite03/user/api/checkemail?email=" + email,
+				type : "get",
+				dataType : "json",
+				error : function(xhr, status, e) {
+					console.error(status, e);
+				},
+				success : function(response) {
+					console.log(response);
 
-							console.log(email);
-							$
-									.ajax({
-										url : "${pageContext.request.contextPath }/user/api/checkemail?email="
-												+ email,
-										type : "get",
-										dataType : "json",
-										error : function(xhr, status, e) {
-											console.error(status, e);
-										},
-										success : function(response) {
-											console.log(response);
+					if (response.result != "success") {
+						console.error(response.message);
+						return;
+					}
 
-											if (response.result != "success") {
-												console.error(response.message);
-												return;
-											}
+					if (response.data) {
+						alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
+						$("#email").val("");
+						$("#email").focus();
+						return;
+					}
 
-											if (response.data) {
-												alert("존재하는 이메일입니다. 다른 이메일을 사용하세요.");
-												$("#email").val("");
-												$("#email").focus();
-												return;
-											}
-
-											$("#btn-check").hide();
-											$("#img-check").show();
-										}
-									});
-						});
+					$("#btn-check").hide();
+					$("#img-check").show();
+				}
+			});
+		});
 	});
 </script>
 </head>
 <body>
 	<div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
-
 
 		<div id="content">
 			<div id="user">
@@ -79,20 +73,18 @@
 						<form:errors path="email" />
 					</p>
 
-					<label class="block-label">
-					<spring:message code="user.join.label.password" />
+					<label class="block-label"> <spring:message code="user.join.label.password" />
 					</label>
 					<form:password path="password" />
+
 					<p style="color: #f00; text-align: left; padding-left: 0">
 						<form:errors path="password" />
 					</p>
 
 					<fieldset>
 						<legend>성별</legend>
-						<label>여</label>
-						<input type="radio" name="gender" value="female" checked="checked">
-						<label>남</label>
-						<input type="radio" name="gender" value="male">
+						<from:radiobutton path="gender" value ="female" label = "여" />
+						<from:radiobutton path="gender" value ="male" label = "남" />
 					</fieldset>
 
 					<fieldset>
