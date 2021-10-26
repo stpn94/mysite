@@ -69,7 +69,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		// 8. 권한 체크
 		/* (6번 결과와 7번결과를 비교하기) */
 		//		과제
-		System.out.println("AuthInterceptor : " + role);
+		System.out.println("AuthInterceptor : " + role + "작업중");
 		if ("ADMIN".equals(role)) {
 			// admin임을 알 수 있는 조건을 작성한다.
 			// ex) 서비스의 id가 root이면 admin이다.

@@ -25,7 +25,6 @@ public class AdminController {
 	@Autowired
 	private GalleryService galleryService;
 
-
 	@RequestMapping("")
 	public String main(Model model) {
 
@@ -36,23 +35,21 @@ public class AdminController {
 
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public String upload(
-			@RequestParam("file") MultipartFile file,
-			@RequestParam(value = "email", required = true, defaultValue = "") String email,
+			@RequestParam("file") MultipartFile file, 
+			@RequestParam(value = "email", required = true, defaultValue = "") String email, 
 			Model model) {
 
 		String url = galleryService.restore(file);
-
 
 		model.addAttribute("url", url);
 
 		return "redirect:/admin";
 	}
 
-
 	@RequestMapping(value = "/main/update", method = RequestMethod.POST)
 	public String updateMain(
-			@ModelAttribute SiteVo vo  ,
-			@RequestParam("file") MultipartFile file ) {
+			@ModelAttribute SiteVo vo, 
+			@RequestParam("file") MultipartFile file) {
 
 		String url = galleryService.restore(file);
 		vo.setProfile(url);
@@ -65,16 +62,14 @@ public class AdminController {
 		return "admin/guestbook";
 	}
 
-	
 	@RequestMapping("/board")
 	public String board() {
 		return "admin/board";
 	}
 
-	@Auth(role = "ADMIN")
 	@RequestMapping("/user")
 	public String user() {
-		return "admin/board";
+		return "admin/user";
 	}
 
 }

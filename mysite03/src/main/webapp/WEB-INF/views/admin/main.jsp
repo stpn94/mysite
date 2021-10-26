@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,29 +15,29 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-form">
-					<form method="post" action="${pageContext.request.contextPath }/admin/main/update/" enctype="multipart/form-data">
+					<form method="post" action="${pageContext.request.contextPath }/admin/main/update" enctype="multipart/form-data">
 						<label class="block-label" for="title">사이트 타이틀</label>
-						<input id="title" name="title" type="text" value="${siteVo.title}">
-						
-						<label class="block-label" for="welcomeMessage">환영 메세지</label>
-						<input id="welcome" name="welcome" type="text" value="${siteVo.welcome}">
+						<input id="title" name="title" type="text" value="${siteVo.title }">
+
+						<label class="block-label" for="welcome">환영 메세지</label>
+						<input id="welcome" name="welcome" type="text" value="${siteVo.welcome }">
 
 						<label class="block-label">프로필 이미지</label>
-						<img id="profile" name="profile" src="${pageContext.request.contextPath }/${siteVo.profile}">
-						<input type="file" name="file1">
+						<img id="profile" src="${pageContext.request.contextPath }/${siteVo.profile }">
+						<input type="file" name="file">
 
 						<label class="block-label">사이트 설명</label>
-						<textarea name="description">${siteVo.description}</textarea>
-						
-						<input type="submit" value="upload" />
+						<textarea name="description">${siteVo.description }</textarea>
+
+						<input type="submit" value="변경" />
 					</form>
-									
-				
+
+
 
 				</div>
 			</div>
 			<c:import url="/WEB-INF/views/admin/include/navigation.jsp">
-				<c:param name="menu" value="main"/>
+				<c:param name="menu" value="main" />
 			</c:import>
 		</div>
 	</div>
