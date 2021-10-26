@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.mysite.security.Auth;
-import com.douzone.mysite.service.GalleryService;
+import com.douzone.mysite.service.FileUploadService;
 import com.douzone.mysite.service.SiteService;
 import com.douzone.mysite.vo.SiteVo;
 
@@ -20,10 +20,10 @@ import com.douzone.mysite.vo.SiteVo;
 public class AdminController {
 
 	@Autowired
-	SiteService siteSevice;
+	private SiteService siteSevice;
 
 	@Autowired
-	private GalleryService galleryService;
+	private FileUploadService fileUploadService;
 
 	@RequestMapping("")
 	public String main(Model model) {
@@ -33,25 +33,26 @@ public class AdminController {
 		return "admin/main";
 	}
 
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String upload(
-			@RequestParam("file") MultipartFile file, 
-			@RequestParam(value = "email", required = true, defaultValue = "") String email, 
-			Model model) {
-
-		String url = galleryService.restore(file);
-
-		model.addAttribute("url", url);
-
-		return "redirect:/admin";
-	}
+//	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+//	public String upload(
+//			@RequestParam("file") MultipartFile file, 
+//			@RequestParam(value = "email", required = true, defaultValue = "") String email, 
+//			Model model) {
+//
+//		String url = fileUploadService.restore(file);
+//
+//		model.addAttribute("url", url);
+//
+//		return "redirect:/admin";
+//	}
 
 	@RequestMapping(value = "/main/update", method = RequestMethod.POST)
 	public String updateMain(
 			@ModelAttribute SiteVo vo, 
 			@RequestParam("file") MultipartFile file) {
 
-		String url = galleryService.restore(file);
+		String url = fileUploadService.restore(file);
+		System.out.println(url);
 		vo.setProfile(url);
 		siteSevice.update(vo);
 		return "redirect:/admin";

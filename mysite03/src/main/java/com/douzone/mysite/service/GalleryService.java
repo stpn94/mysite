@@ -78,37 +78,4 @@ public class GalleryService {
 		return filename;
 	}
 
-	public String restore(MultipartFile file) {
-		String url = null;
-		try {
-			File uploadDirectory = new File(SAVE_PATH);
-			if (!uploadDirectory.exists()) {
-				uploadDirectory.mkdir();
-			}
-
-			if (file.isEmpty()) {
-				throw new GalleryServiceException("file upload error: image empty");
-			}
-
-			String originFilename = file.getOriginalFilename();
-			String extName = originFilename.substring(originFilename.lastIndexOf('.') + 1);
-			String saveFilename = generateSaveFilename(extName);
-
-			byte[] data = file.getBytes();
-			OutputStream os = new FileOutputStream(SAVE_PATH + "/" + saveFilename);
-			os.write(data);
-			os.close();
-
-			GalleryVo vo = new GalleryVo();
-			vo.setUrl(URL_BASE + "/" + saveFilename);
-
-			galleryRepository.insert(vo);
-			url = URL_BASE + "/" + saveFilename;
-			System.out.println(url);
-		} catch (IOException ex) {
-			throw new GalleryServiceException("file upload error:" + ex);
-		}
-		return url;
-	}
-
 }
