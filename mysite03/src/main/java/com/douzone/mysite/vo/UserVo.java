@@ -8,12 +8,11 @@ import org.hibernate.validator.constraints.Length;
 public class UserVo {
 	private Long no;
 	@NotEmpty
-	@Length(min=2, max=8)//2자 이상 8자 이하
+	@Length(min=2, max=8)
 	private String name;
 	@NotEmpty
 	@Email
 	private String email;
-	
 	@NotEmpty
 	@Length(min=4, max=16)
 	private String password;

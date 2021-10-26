@@ -1,6 +1,6 @@
 package com.douzone.mysite.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +30,21 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(@Valid UserVo vo, BindingResult result) {
+	public String join(@ModelAttribute @Valid UserVo vo, BindingResult result , Model model) {
 		if(result.hasErrors()) {
 			// BindingResult result는 Valid(검사)하고 난 결과
-			List<ObjectError> errlist = result.getAllErrors();
-			for(ObjectError error : errlist) {
-				System.out.println(error);
-			}
+//			List<ObjectError> errlist = result.getAllErrors();
+//			for(ObjectError error : errlist) {
+//				System.out.println(error);
+//			}
+			
+			/* Map 형태로 UserVo 객체를 키
+			 * "userVo" : Object 
+			 * 이렇게 된 Map을 꺼내준다.*/
+			
+			Map<String, Object> map = result.getModel();
+//			model.addAttribute("userVo", map.get("userVo"));
+			model.addAllAttributes(map);
 			return "user/join";
 		}
 		
