@@ -1,54 +1,48 @@
 package com.douzone.mysite.service;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Calendar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.douzone.mysite.exception.GalleryServiceException;
-import com.douzone.mysite.exception.GlobalExceptionHandler;
+import com.douzone.mysite.exception.FileUploadException;
 
 @Service
 public class FileUploadService {
-	private static final Log LOGGER = LogFactory.getLog(GlobalExceptionHandler.class);
-	private static final String SAVE_PATH = "/upload-mysite";
-	private static final String URL_BASE = "/images";
+	private static String SAVE_PATH = "/upload-mysite";
+	private static String URL_BASE = "/upload/images";	
 	
-	public String restore(MultipartFile file) {
-		String url = null;
-		
+	public String restoreImage(MultipartFile file) throws FileUploadException {
 		try {
+			File uploadDirectory = new File(SAVE_PATH);
+			if(!uploadDirectory.exists()) {
+				uploadDirectory.mkdir();
+			}
+			
 			if(file.isEmpty()) {
-				return url;
+				throw new FileUploadException("file upload error: image empty");
 			}
 			
 			String originFilename = file.getOriginalFilename();
 			String extName = originFilename.substring(originFilename.lastIndexOf('.')+1);
 			String saveFilename = generateSaveFilename(extName);
-			long fileSize = file.getSize();
 			
-			LOGGER.info("############ " + originFilename);
-			LOGGER.info("############ " + fileSize);
-			LOGGER.info("############ " + saveFilename);
-		
 			byte[] data = file.getBytes();
 			OutputStream os = new FileOutputStream(SAVE_PATH + "/" + saveFilename);
 			os.write(data);
 			os.close();
-			
-			url = URL_BASE + "/" + saveFilename;
-		} catch (IOException e) {
-			 throw new GalleryServiceException ("file upload error:" + e);
-		}
-		
-		return url;
-	}
 
+			return URL_BASE + "/" + saveFilename;
+			
+		} catch(IOException ex) {
+			throw new FileUploadException("file upload error:" + ex);
+		}
+	}
+	
 	private String generateSaveFilename(String extName) {
 		String filename = "";
 		
@@ -64,5 +58,5 @@ public class FileUploadService {
 		filename += ("." + extName);
 		
 		return filename;
-	}
+	}	
 }

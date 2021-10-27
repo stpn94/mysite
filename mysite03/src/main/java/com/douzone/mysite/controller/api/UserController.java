@@ -10,17 +10,17 @@ import com.douzone.mysite.dto.JsonResult;
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
 
-@RestController("userControllerApi")
+@RestController("userApiController")
 @RequestMapping("/user/api")
 public class UserController {
-	
 	@Autowired
 	private UserService userService;
 	
+	// @ResponseBody
+	// @RequestMapping("/checkemail")
 	@GetMapping("/checkemail")
-	public JsonResult checkEmail(@RequestParam(value="email", required=true, defaultValue="") String email) {
+	public JsonResult checkemail(@RequestParam(value="email", required=true, defaultValue="") String email) {
 		UserVo userVo = userService.getUser(email);
 		return JsonResult.success(userVo != null);
 	}
-	
 }

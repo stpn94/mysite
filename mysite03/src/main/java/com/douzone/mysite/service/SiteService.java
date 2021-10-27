@@ -8,21 +8,14 @@ import com.douzone.mysite.vo.SiteVo;
 
 @Service
 public class SiteService {
-	
 	@Autowired
-	SiteRepository siteRepository;
+	private SiteRepository siteRepository;
 
-	public SiteVo findOne() {
-		return siteRepository.findOne();
+	public SiteVo getSite() {
+		return siteRepository.find();
 	}
 
-	public void update(SiteVo vo) {
-		
-		siteRepository.update(vo);
-		
+	public boolean update(SiteVo siteVo) {
+		return siteRepository.update(siteVo);
 	}
-
-	
-	
-
 }

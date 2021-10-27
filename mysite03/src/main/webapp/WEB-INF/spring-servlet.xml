@@ -14,72 +14,87 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- auto proxy -->
-	<aop:aspectj-autoproxy/>
-
+	<aop:aspectj-autoproxy />
+	
 	<!-- validator, conversionService, messageConverter를 자동으로 등록 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>			
+		</mvc:message-converters>
+		
+		<mvc:argument-resolvers>
+			<bean class="com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet 위임(Delegate) Handler -->
 	<mvc:default-servlet-handler/>
-
+	
 	<!-- mvc url-resource mapping -->
-	<mvc:resources mapping="/gallery/images/**" location="file:/upload-mysite/"/>
-
-	<!-- interceptors SETTING -->
+	<mvc:resources mapping="/upload/images/**" location="file:/upload-mysite/" />
+	
+	<!-- Interceptors -->
 	<mvc:interceptors>
-
-		<mvc:interceptor>
-			<mvc:mapping path="/user/auth"/>
-			<bean class="com.douzone.mysite.security.LoginInterceptor"/>
-		</mvc:interceptor>
-
-		<mvc:interceptor>
-			<mvc:mapping path="/user/logout"/>
-			<bean class="com.douzone.mysite.security.LogoutInterceptor"/>
-		</mvc:interceptor>
-
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
-			<mvc:mapping path="/user/auth"/>
-			<mvc:mapping path="/user/logout"/>
-			<mvc:mapping path="/assets/**"/>
-			<bean class="com.douzone.mysite.security.AuthInterceptor"/>
+			<bean class="com.douzone.mysite.interceptor.SiteInterceptor" />
 		</mvc:interceptor>
-
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth"/>
+			<bean class="com.douzone.mysite.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout"/>
+			<bean class="com.douzone.mysite.security.LogoutInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/user/auth"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.douzone.mysite.security.AuthInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
+	
+	<!-- ViewResolver -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
-	<!-- ViewResolver 설정 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/WEB-INF/views/"/>
-		<property name="suffix" value=".jsp"/>
+	<!-- Multipart Resolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 최대업로드 가능한 바이트크기 -->
+		<property name="maxUploadSize" value="52428800" />
+		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
+		<!-- property name="maxInMemorySize" value="52428800" /-->
+		<!-- defaultEncoding -->
+		<property name="defaultEncoding" value="utf-8" />
 	</bean>
 	
-	<!-- 6. MessageSource -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ResourceBundleMessageSource">
+	<!-- Message Source -->		
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
 				<value>messages/messages_ko</value>
 			</list>
 		</property>
-	</bean>
-	
-	<!-- 멀티파트 리졸버 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 최대업로드 가능한 바이트크기 -->
-		<property name="maxUploadSize" value="52428800"/>
-		<!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
-		<!-- property name="maxInMemorySize" value="52428800" / -->
-		<!-- defaultEncoding -->
-		<property name="defaultEncoding" value="utf-8"/>
-	</bean>
+	</bean>		
 
-
-
-	<context:annotation-config/>
-	<context:component-scan
-		base-package="com.douzone.mysite.controller, com.douzone.mysite.exception"/>
+	<context:annotation-config />
+	<context:component-scan base-package="com.douzone.mysite.controller, com.douzone.mysite.exception" />
 </beans>

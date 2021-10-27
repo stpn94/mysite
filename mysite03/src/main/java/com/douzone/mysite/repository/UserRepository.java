@@ -32,13 +32,12 @@ public class UserRepository {
 		return sqlSession.selectOne("user.findByNo", no);
 	}
 
+	public UserVo findByEmail(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
+	}
+
 	public boolean update(UserVo vo) {
 		int count = sqlSession.update("user.update", vo);
 		return count == 1;
 	}
-
-	public UserVo findByEmail(String email) {
-		return sqlSession.selectOne("user.findByEmail", email);
-	}
-	
 }

@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 
 /* reset */
 *				{ margin:0; padding:0 }
@@ -12,7 +12,7 @@ div#navigation	{ float:left; width:120px;  }
 div#footer		{ clear:both; width:100% }
 
 /* header */
-div#header	h1				{ height:70px; line-height:70px; margin:0; padding-left:10px; color:#79B30B }
+div#header	h1 a 			{ text-decoration: none; height:70px; line-height:70px; margin:0; padding-left:10px; color:#79B30B }
 div#header	ul				{ height:20px; margin:0 20px 10px 0 } 
 div#header	li				{ float:right }
 div#header	li a 			{ color:#4F4F4F; font-weight:bold; margin-left:10px; text-decoration:none; }

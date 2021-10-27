@@ -1,13 +1,13 @@
 package com.douzone.mysite.exception;
 
-public class GalleryServiceException extends RuntimeException {
+public class FileUploadException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	
-	public GalleryServiceException() {
+	public FileUploadException() {
 		super("GalleryServiceException Occurs");
 	}
 
-	public GalleryServiceException(String message) {
+	public FileUploadException(String message) {
 		super(message);
 	}
 	

@@ -8,22 +8,15 @@ import com.douzone.mysite.vo.SiteVo;
 
 @Repository
 public class SiteRepository {
-	
 	@Autowired
 	private SqlSession sqlSession;
-    
-	public SiteVo findOne() {
-		
-		return sqlSession.selectOne("site.findOne");
-		
-	}
-	
-	public void update(SiteVo vo) {
-		sqlSession.update("site.update",  vo);
-	}
-	
-	
 
+	public SiteVo find() {
+		return sqlSession.selectOne("site.find");
+	}
 
-	
+	public boolean update(SiteVo vo) {
+		int count = sqlSession.update("site.update", vo);
+		return count == 1;
+	}
 }

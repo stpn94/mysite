@@ -35,7 +35,6 @@ public class BoardRepository {
 	public int update( BoardVo boardVo ) {
 		
 		return sqlSession.update( "board.update", boardVo );
-		
 	}
 	
 	public int delete( Long no, Long userNo ) {

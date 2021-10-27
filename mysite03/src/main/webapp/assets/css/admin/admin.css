@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@CHARSET "UTF-8";
 
 /* reset */
 *				{ margin:0; padding:0 }
@@ -13,7 +13,7 @@ div#navigation	{ float:left; width:140px; height:100% }
 /* header */
 div#header					{ height:60px; background:#515151; color: #FFF  }
 div#header	h1				{ float:left; line-height:60px; margin:0; padding-left:10px; color:#79B30B }
-div#header	ul				{ background-color:#fff } 
+div#header	ul				{ height:30px; backgdound-color:#fff } 
 div#header	li				{ float:right; margin-top:30px; }
 div#header	li a 			{ color:#fff; font-weight:bold; margin-right:10px; text-decoration:none; }
 
