@@ -4,13 +4,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>mysite04</display-name>
-
-	<!-- mysite04 = Class로 만드니까 삭제  -->
-<!-- <context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext.xml</param-value>
-	 </context-param> -->
-
+	
 	<!-- Encoding Filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -26,11 +20,15 @@
 	</filter-mapping>
 	
 	<!-- Context Parameter -->
-	<!-- ? 알아내라 -->
+	<!-- Servlet에서 어노테이션 할때 참조할 클래스 설정 -->
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 	</context-param>
+	
+	<!-- 원래는 /WEB-INF/applicationContext.xml 이쪽으로 값설정해서 참고했는데
+	AppConfig.Class에 넣어뒀음 -->
+	<!-- AppConfig.Class는 공용 Config(말그대로 기능 참고 클래스) -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>com.douzone.mysite.config.AppConfig</param-value>
@@ -42,10 +40,14 @@
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		
+		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
 		<init-param>
 			<param-name>contextClass</param-name>
 			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
 		</init-param>
+		
+		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
+		<!-- WebConfig.Class는 말그대로 웹 참고 클래스 -->
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>com.douzone.mysite.config.WebConfig</param-value>
