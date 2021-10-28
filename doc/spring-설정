@@ -1,0 +1,14 @@
+1. maven project 생성(war)
+2. web.xml 추가 (Java EE Tools > Generate Deployment Descriptor Stub)
+3. target runtime 설정
+4. pom.xml 설정
+5. web.xml 설정
+   1) /WEB-INF/applicationContext.xml (Root Application Context)
+   2) /WEB-INF/spring-servlet.xml     (Web Application Context)
+6. package
+   com.douzone.mysite.controller
+   com.douzone.mysite.service
+   com.douzone.mysite.repository
+   com.douzone.mysite.vo
+7. views/*.jsp 파일 정리
+8. controller, service, repository 소스 코드 작업
