@@ -16,6 +16,7 @@
 	<!-- auto proxy -->
 	<aop:aspectj-autoproxy />
 	
+	<!-- DBConfig.java로 간다. -->
 	<!-- Connection Pool DataSource-->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
