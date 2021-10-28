@@ -25,12 +25,14 @@
 		<property name="password" value="webdb" />
 	</bean>
 
+	<!-- MyBatisConfig.java로 간다. -->
 	<!-- MyBatis SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/configuration.xml" />
 	</bean>	
 	
+	<!-- MyBatisConfig.java로 간다. -->
 	<!-- MyBatis SqlSessionTemplate -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
