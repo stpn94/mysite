@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!-- <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
@@ -13,11 +13,11 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
-	<!-- auto proxy -->
+	auto proxy
 	<aop:aspectj-autoproxy />
 	
-	<!-- DBConfig.java로 간다. -->
-	<!-- Connection Pool DataSource-->
+	DBConfig.java로 간다.
+	Connection Pool DataSource
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8" />
@@ -25,15 +25,15 @@
 		<property name="password" value="webdb" />
 	</bean>
 
-	<!-- MyBatisConfig.java로 간다. -->
-	<!-- MyBatis SqlSessionFactoryBean -->
+	MyBatisConfig.java로 간다.
+	MyBatis SqlSessionFactoryBean
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis/configuration.xml" />
 	</bean>	
 	
-	<!-- MyBatisConfig.java로 간다. -->
-	<!-- MyBatis SqlSessionTemplate -->
+	MyBatisConfig.java로 간다.
+	MyBatis SqlSessionTemplate
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
@@ -45,4 +45,4 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
 	</context:component-scan>
 
-</beans>
+</beans> -->
