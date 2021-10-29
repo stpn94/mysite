@@ -21,6 +21,7 @@
 	
 	<!-- Context Parameter -->
 	<!-- Servlet에서 어노테이션 할때 참조할 클래스 설정 -->
+	<!-- 원래는 appContext.xml 썼는데 이걸 해줌으로써 @ 어노테이션을 쓰겠다 라고 하는것 -->
 	<context-param>
 		<param-name>contextClass</param-name>
 		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -41,6 +42,7 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		
 		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
+		<!-- 스프링 spring-Context.xml 썼는데 이걸 해줌으로써 @ 어노테이션을 쓰겠다 라고 하는것 -->
 		<init-param>
 			<param-name>contextClass</param-name>
 			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -48,6 +50,7 @@
 		
 		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
 		<!-- WebConfig.Class는 말그대로 웹 참고 클래스 -->
+		
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>com.douzone.mysite.config.WebConfig</param-value>

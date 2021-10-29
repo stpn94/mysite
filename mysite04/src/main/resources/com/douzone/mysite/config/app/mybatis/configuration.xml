@@ -9,10 +9,10 @@
 		<typeAlias type="com.douzone.mysite.vo.SiteVo" alias="sitevo" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis/mappers/guestbook.xml" />
-		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/gallery.xml" />
-		<mapper resource="mybatis/mappers/board.xml" />
-		<mapper resource="mybatis/mappers/site.xml" />
+		<mapper resource="com/douzone/mysite/config/app/mybatis/mappers/guestbook.xml" />
+		<mapper resource="com/douzone/mysite/config/app/mybatis/mappers/user.xml" />
+		<mapper resource="com/douzone/mysite/config/app/mybatis/mappers/gallery.xml" />
+		<mapper resource="com/douzone/mysite/config/app/mybatis/mappers/board.xml" />
+		<mapper resource="com/douzone/mysite/config/app/mybatis/mappers/site.xml" />
 	</mappers>
 </configuration>
