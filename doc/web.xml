@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://JAVA.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>mysite04</display-name>
+	
+	<!-- Encoding Filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Context Parameter -->
+	<!-- Servlet에서 어노테이션 할때 참조할 클래스 설정 -->
+	<!-- 원래는 appContext.xml 썼는데 이걸 해줌으로써 @ 어노테이션을 쓰겠다 라고 하는것 -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
+	
+	<!-- 원래는 /WEB-INF/applicationContext.xml 이쪽으로 값설정해서 참고했는데
+	AppConfig.Class에 넣어뒀음 -->
+	<!-- AppConfig.Class는 공용 Config(말그대로 기능 참고 클래스) -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>com.douzone.mysite.config.AppConfig</param-value>
+	</context-param>
+	
+	<!-- Dispatcher Servlet -->
+	<!-- mysite04 = init-param 추가 -->
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		
+		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
+		<!-- 스프링 spring-Context.xml 썼는데 이걸 해줌으로써 @ 어노테이션을 쓰겠다 라고 하는것 -->
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		
+		<!-- spring에서 어노테이션 할때 참조할 클래스 설정 -->
+		<!-- WebConfig.Class는 말그대로 웹 참고 클래스 -->
+		
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>com.douzone.mysite.config.WebConfig</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- ContextLoad Listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 공통 에러 페이지 -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+
+	<!-- welcome(default) 페이지 -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
