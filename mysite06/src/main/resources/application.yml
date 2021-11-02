@@ -1,0 +1,106 @@
+# active spring boot profile
+# profile ==> profiles
+spring:
+   profiles:
+      active: dev     
+
+---
+# common - spring configuration
+spring:
+
+   # devtools - live reload
+   devtools:
+      livereload:
+         enabled: true
+
+   # mvc
+   mvc:
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp
+
+   # http
+   # spring.http.encoding ==> server.servlet.encoding
+   
+   
+   # message resource(Internationalization)
+   # always-message-format ==> always-use-message-format
+   messages:
+      always-use-message-format: true
+      basename: messages/messages_ko
+      encoding: utf-8
+
+   # multipart
+   servlet:
+      multipart:
+         enabled: true
+         max-file-size: 50MB
+         max-request-size: 50MB
+
+
+   # aop(@EnableAspectJAutoProxy)
+   # aop.auto ↓↓↓
+   aop:
+      auto: true
+      proxy-target-class: true 
+
+
+---
+# dev profile - spring boot configuration
+# spring.profile ==> spring.profiles.group
+spring:
+   config:
+      activate:
+         on-profile: dev
+      
+   # datasource
+   # datasource.... ↓↓↓
+   datasource:
+      username: webdb
+      password: webdb
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20---
+# production profile - spring boot configuration
+# spring.profile ==> spring.profiles.group
+spring:
+   config:
+      activate:
+         on-profile: production
+
+   # datasource
+   # datasource.... ↓↓↓
+   datasource:
+      username: webdb
+      password: blahblha#!@0909#@!
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://227.8.9.10:3306/webdb?characterEncoding=utf8
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
+---
+# server
+server:
+   port: 8080
+   servlet:
+     context-path: /mysite06
+     encoding:
+        charset: utf-8
+        enabled: true
+        force: false
+        force-request: false
+        force-response: false
+
+---
+
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+
+
+---
+# logging
+logging:
+   config: classpath:logback.xml 
