@@ -3,6 +3,7 @@
 spring:
    profiles:
       active: dev     
+
 ---
 # common - spring configuration
 spring:
@@ -39,56 +40,61 @@ spring:
 
    # aop(@EnableAspectJAutoProxy)
    # aop.auto ↓↓↓
-   aop:      auto: true
+   aop:
+      auto: true
       proxy-target-class: true 
+
+
+---
+# dev profile - spring boot configuration
+# spring.profile ==> spring.profiles.group
+spring:
+   config:
+      activate:
+         on-profile: dev
+      
+   # datasource
+   # datasource.... ↓↓↓
+   datasource:
+      username: webdb
+      password: webdb
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
 
 ---
 # production profile - spring boot configuration
 # spring.profile ==> spring.profiles.group
 spring:
-   profiles:
-      group: production
+   config:
+      activate:
+         on-profile: production
 
    # datasource
    # datasource.... ↓↓↓
    datasource:
-      dbcp2:
-         driver-class-name: org.mariadb.jdbc.Driver
-         url: jdbc:mysql://227.8.9.10:3306/webdb?characterEncoding=utf8
-         username: webdb
-         password: blahblha#!@0909#@!         initial-size: 10
-         max-total: 20      
+      username: webdb
+      password: blahblha#!@0909#@!
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://227.8.9.10:3306/webdb?characterEncoding=utf8
+      hikari:
+         minimum-idle: 10
+         maximum-pool-size: 20
 ---
-# dev profile - spring boot configuration
-# spring.profile ==> spring.profiles.group
-spring:
-   profiles:
-      group: dev
-
-   # datasource
-   # datasource.... ↓↓↓
-   datasource:
-      dbcp2:
-         driver-class-name: org.mariadb.jdbc.Driver
-         url: jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8
-         username: webdb
-         password: webdb
-         initial-size: 10
-         max-total: 20
-
-
----
-
 # server
 server:
    port: 8080
    servlet:
      context-path: /mysite06
-     encoding:        charset: utf-8
+     encoding:
+        charset: utf-8
         enabled: true
         force: false
         force-request: false
         force-response: false
+
 ---
 
 # mybatis
