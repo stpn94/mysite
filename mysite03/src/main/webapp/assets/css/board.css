@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 @import "mysite.css";
 
 #board {
@@ -12,7 +12,7 @@
 	text-align:center; 	 
 }
 
-input[type="text"]	{
+input[type="text"] {
 	padding:5px; 
 	border:1px solid #aaa
 }
@@ -41,8 +41,7 @@ input#kwd	{
 	border-bottom:2px solid #333;
 }
 
-.tbl-ex th, 
-.tbl-ex td	{ 
+.tbl-ex th, .tbl-ex td	{ 
 	padding:8px;
 	text-align:center; 	 
 }
