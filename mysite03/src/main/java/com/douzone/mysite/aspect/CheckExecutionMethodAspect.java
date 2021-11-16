@@ -13,6 +13,7 @@ public class CheckExecutionMethodAspect {
 	public Object aroundAdvice(ProceedingJoinPoint pjp) throws Throwable {
 		Object result = pjp.proceed();
 		
+		
 		// after
 		String className = pjp.getTarget().getClass().getName();
 		String methodName = pjp.getSignature().getName();

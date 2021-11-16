@@ -12,20 +12,29 @@ import com.douzone.mysite.vo.GuestbookVo;
 public class GuestbookService {
 	@Autowired
 	GuestbookRepository guestbookRepository;
-	
+
 	public List<GuestbookVo> getMessageList() {
-			return guestbookRepository.findAll();
+		return guestbookRepository.findAll();
 	}
-	
+
 	public boolean deleteMessage(Long no, String password) {
 		GuestbookVo vo = new GuestbookVo();
 		vo.setNo(no);
 		vo.setPassword(password);
-		
+
 		return guestbookRepository.delete(vo);
 	}
 
 	public boolean addMessage(GuestbookVo vo) {
 		return guestbookRepository.insert(vo);
+	}
+	
+	
+	public List<GuestbookVo> getMessageList(Long no/* 기준 */) {
+		return guestbookRepository.findAll(no);
+	}
+	
+	public Long getMaxNo() {
+		return guestbookRepository.MaxNo();
 	}
 }

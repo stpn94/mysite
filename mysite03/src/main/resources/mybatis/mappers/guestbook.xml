@@ -23,13 +23,31 @@
 		delete from guestbook where no=#{no } and password=#{password }
 		]]>
 	</delete>
-	
+
 	<select id="findAll" resultType="guestbookvo">
 		<![CDATA[
 		  select no, name, date_format(reg_date, '%Y/%m/%d %H:%i:%s') as regDate, message
 		    from guestbook
 		order by reg_date desc
 		]]>
+	</select>
+
+	<select id="MaxNo" resultType="long">
+		SELECT MAX(no)
+		FROM guestbook
+	</select>
+
+	<select id="findAllByNo" resultType="guestbookvo">
+		SELECT no , name , password , message , reg_date
+		FROM guestbook
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="value == -1">
+			1=1
+			</if>
+			and no > #{value}
+		</trim>
+		ORDER BY no DESC
+		LIMIT 0 , 3;
 	</select>
 
 </mapper>
