@@ -22,4 +22,5 @@
 - WebApplicationInitlalizer를 통해 위 web.xml에서 설정해 주었던 설정을  MysiteWebApplicationInitlalizer 클래스에 설정
 
 ## mysite06 - SpringBoot
-- spring Boot를 
+- spring Boot를 사용하여 mysite를 제작
+- 위의 설정들은 application.yml에 설정함으로써 클래스를 만들어 설정하는 수고를 덜어준다.
